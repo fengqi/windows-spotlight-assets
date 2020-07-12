@@ -25,15 +25,15 @@ func main() {
 	}
 
 	for _, f := range files {
+		dst := destination + "\\" + f.Name() + ".jpg"
+		if exists(dst) {
+			continue
+		}
+
 		src := path + "\\" + f.Name()
 		input, err := ioutil.ReadFile(src)
 		if err != nil {
 			log.Println("ReadFile err: " + err.Error())
-			continue
-		}
-
-		dst := destination + "\\" + f.Name() + ".jpg"
-		if exists(dst) {
 			continue
 		}
 
