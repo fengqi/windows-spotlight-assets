@@ -1,6 +1,9 @@
 package main
 
 import (
+	"bytes"
+	"image"
+	_ "image/jpeg"
 	"io/ioutil"
 	"log"
 	"os"
@@ -34,6 +37,11 @@ func main() {
 		input, err := ioutil.ReadFile(src)
 		if err != nil {
 			log.Println("ReadFile err: " + err.Error())
+			continue
+		}
+
+		img, _, err := image.DecodeConfig(bytes.NewReader(input))
+		if err != nil || img.Height > img.Width {
 			continue
 		}
 
